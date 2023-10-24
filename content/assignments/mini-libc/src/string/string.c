@@ -26,16 +26,16 @@ char *strncpy(char *destination, const char *source, size_t len)
 char *strcat(char *destination, const char *source)
 {
 	/* TODO: Implement strcat(). */
-	strcpy(destination[strlen(source)], source);
+	strcpy(destination + strlen(source), source);
 	return destination;
 }
 
 char *strncat(char *destination, const char *source, size_t len)
 {
 	/* TODO: Implement strncat(). */
-	size_t dest_len = strlen(destination);
+	size_t dest_len = strlen(destination), i;
 
-	for (size_t i = 0; i < dest_len; i++) {
+	for (i = 0; i < len; i++) {
 		destination[dest_len + i] = source[i];
 		if (source + i == NULL)
 			return destination;
@@ -47,8 +47,8 @@ char *strncat(char *destination, const char *source, size_t len)
 int strcmp(const char *str1, const char *str2)
 {
 	/* TODO: Implement strcmp(). */
-	size_t len = strlen(str1);
-	for (size_t i = 0; i < len; i++) {
+	size_t len = strlen(str1), i;
+	for (i = 0; i < len; i++) {
 		if (str1[i] < str2[i])
 			return -1;
 		if (str1[i] > str2[i])
@@ -86,10 +86,10 @@ size_t strlen(const char *str)
 char *strchr(const char *str, int c)
 {
 	/* TODO: Implement strchr(). */
-	size_t len = strlen(str1);
+	size_t len = strlen(str);
 	for (size_t i = 0; i < len; i++) {
 		if (str[i] == c)
-			return str + i;
+			return &str[i];
 	}
 	return NULL;
 }
