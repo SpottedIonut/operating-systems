@@ -17,7 +17,7 @@ char *strncpy(char *destination, const char *source, size_t len)
 	/* TODO: Implement strncpy(). */
 	for (size_t i = 0; i < len; i++) {
 		destination[i] = source[i];
-		if (destination[i] == NULL)
+		if (destination + i == NULL)
 			return destination;
 	}
 	return destination;
@@ -37,10 +37,10 @@ char *strncat(char *destination, const char *source, size_t len)
 
 	for (size_t i = 0; i < dest_len; i++) {
 		destination[dest_len + i] = source[i];
-		if (source[i] == NULL)
+		if (source + i == NULL)
 			return destination;
 	}
-	destination[dest_len + i + 1] = NULL;
+	destination[dest_len + i + 1] = 0;
 	return destination;
 }
 
@@ -54,7 +54,7 @@ int strcmp(const char *str1, const char *str2)
 		if (str1[i] > str2[i])
 			return 1;
 	}
-	if (str2[i] != NULL)
+	if (str2 + i != NULL)
 		return -1;
 	return 0;
 }
@@ -67,7 +67,7 @@ int strncmp(const char *str1, const char *str2, size_t len)
 			return -1;
 		if (str1[i] > str2[i])
 			return 1;
-		if (str1[i] == NULL && str2[i] == NULL)
+		if (str1 + i == NULL && str2 + i == NULL)
 			return 0;
 	}
 	return 0;
